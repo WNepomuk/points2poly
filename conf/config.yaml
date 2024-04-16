@@ -4,11 +4,11 @@ indir: '${root_dir}/datasets/${dataset_name}'
 outdir: '${root_dir}/outputs/${dataset_name}'
 modeldir: '${root_dir}/models'
 models: '${model_name}'
-model_name: 'helsinki_fullview'
+model_name: 'aerial'
 modelpostfix: '_model.pth'
 complexes_path: null
 datadir: '${root_dir}/datasets'
-dataset_name: 'helsinki_mini'
+dataset_name: 'tum'
 dataset: '${indir}/testset.txt'
 dataset_paths: '${root_dir}/datasets/${dataset_name}/06_vertex_group/*.vg'
 result_dir: '${outdir}/reconstructed'
@@ -21,6 +21,7 @@ url_models: {'helsinki_fullview': 'https://drive.google.com/uc?export=download&i
 # abspy settings
 normalise: false
 append_bottom: false
+#append_bottom: false
 prioritise_verticals: false
 coefficient: 0.0010
 refine_epsilon: 0.005

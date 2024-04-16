@@ -21,6 +21,7 @@ import os
 import sys
 
 # intact points2surf submodule
+sys.path.append(os.path.abspath('points2poly'))
 sys.path.append(os.path.abspath('points2surf'))
 
 import hydra
@@ -43,6 +44,7 @@ def reconstruct_full(cfg: DictConfig):
     # create cell complexes and save query points (.npy)
     complexes = {}
     for filepath in glob.glob(cfg.dataset_paths):
+        print(filepath)
         filepath = Path(filepath)
 
         # prioritise_verticals for buildings
@@ -68,6 +70,7 @@ def reconstruct_full(cfg: DictConfig):
             pickle.dump(complexes, f_complexes)
 
     # batch prediction and save sdf values (.npy)
+    print('Infering sdf ...')
     infer_sdf(cfg)
 
     # extract surfaces (.obj)
@@ -78,6 +81,8 @@ def reconstruct_full(cfg: DictConfig):
             continue
 
         sdf_values = np.load(sdf_path)
+        print('Extracting Surface ...')
+        print(complexes[name])
         extract_surface((Path(cfg.result_dir) / name).with_suffix('.obj'), complexes[name],
                         sdf_values, graph_cut=True, coefficient=cfg.coefficient)
 
